@@ -31,10 +31,6 @@ public class TransactionHistory {
         return total;
     }
 
-    public int getTransactionCount() {
-        return transactions.size();
-    }
-
     public boolean isEmpty() {
         return transactions.isEmpty();
     }

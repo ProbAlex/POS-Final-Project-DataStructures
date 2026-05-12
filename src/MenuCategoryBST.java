@@ -94,9 +94,5 @@ public class MenuCategoryBST {
         return sb.toString();
     }
 
-    public String getCategory() { return category; }
-
-    public int getSize() { return size; }
-
     public boolean isEmpty() { return root == null; }
 }

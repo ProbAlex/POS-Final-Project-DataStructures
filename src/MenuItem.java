@@ -20,12 +20,6 @@ public class MenuItem implements Comparable<MenuItem> {
     public String getCategory() { return category; }
     public int getPrepTimeMinutes() { return prepTimeMinutes; }
 
-    public void setEnglishName(String englishName) { this.englishName = englishName; }
-    public void setMandarinName(String mandarinName) { this.mandarinName = mandarinName; }
-    public void setPrice(double price) { this.price = price; }
-    public void setCategory(String category) { this.category = category; }
-    public void setPrepTimeMinutes(int prepTimeMinutes) { this.prepTimeMinutes = prepTimeMinutes; }
-
     public int compareTo(MenuItem other) {
         return this.englishName.compareToIgnoreCase(other.englishName);
     }

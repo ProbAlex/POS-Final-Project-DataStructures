@@ -3,11 +3,11 @@ import java.util.List;
 
 public class Main {
     private static POSSystem pos;
-    private static Scanner scanner;
+    private static Scanner scan;
 
     public static void main(String[] args) {
         pos = new POSSystem();
-        scanner = new Scanner(System.in);
+        scan = new Scanner(System.in);
 
         System.out.println("==========================================================");
         System.out.println("|     BILINGUAL POS SYSTEM 双语收银系统                     |");
@@ -20,7 +20,7 @@ public class Main {
         }
 
         System.out.println("\nThank you for using the POS System. Goodbye! 再见！");
-        scanner.close();
+        scan.close();
     }
 
     private static boolean displayMainMenu() {
@@ -31,7 +31,7 @@ public class Main {
         System.out.println("[0] Exit 退出");
         System.out.print("\nSelect option: ");
 
-        String choice = scanner.nextLine().trim();
+        String choice = scan.nextLine().trim();
         switch (choice) {
             case "1": handleCashierMode(); break;
             case "2": handleKitchenMode(); break;
@@ -57,7 +57,7 @@ public class Main {
             System.out.println("[0] Back to Main Menu 返回主菜单");
             System.out.print("\nSelect option: ");
 
-            String choice = scanner.nextLine().trim();
+            String choice = scan.nextLine().trim();
             switch (choice) {
                 case "1": startNewOrder(); break;
                 case "2": System.out.println(pos.getMenu().displayFullMenu()); break;
@@ -80,7 +80,7 @@ public class Main {
         }
         System.out.print("Enter table number: ");
         try {
-            int tableNum = Integer.parseInt(scanner.nextLine().trim());
+            int tableNum = scan.nextInt();
             pos.startNewOrder(tableNum);
             System.out.println("✓ New order started for Table " + tableNum);
         } catch (NumberFormatException e) {
@@ -104,7 +104,7 @@ public class Main {
         System.out.println(pos.getMenu().displayNumberedMenu());
         System.out.print("Enter item number (or 0 to cancel): ");
         try {
-            int itemNum = Integer.parseInt(scanner.nextLine().trim());
+            int itemNum = scan.nextInt();
             if (itemNum == 0) return;
 
             MenuItem item = pos.getMenu().getItemByIndex(itemNum);
@@ -146,7 +146,7 @@ public class Main {
         System.out.println(pos.getCurrentOrder().toCashierDisplay());
         System.out.print("Confirm submission? (y/n): ");
 
-        if (scanner.nextLine().trim().equalsIgnoreCase("y")) {
+        if (scan.nextLine().trim().equalsIgnoreCase("y")) {
             pos.submitOrder();
             System.out.println("✓ Order submitted to kitchen!");
         } else {
@@ -160,7 +160,7 @@ public class Main {
             return;
         }
         System.out.print("Are you sure you want to cancel this order? (y/n): ");
-        if (scanner.nextLine().trim().equalsIgnoreCase("y")) {
+        if (scan.nextLine().trim().equalsIgnoreCase("y")) {
             pos.cancelCurrentOrder();
             System.out.println("✓ Order cancelled.");
         }
@@ -168,7 +168,7 @@ public class Main {
 
     private static void searchMenu() {
         System.out.print("Enter search term (English): ");
-        String term = scanner.nextLine().trim();
+        String term = scan.nextLine().trim();
         List<MenuItem> results = pos.getMenu().searchByEnglish(term);
 
         if (results.isEmpty()) {
@@ -192,7 +192,7 @@ public class Main {
             System.out.println("[0] Back to Main Menu 返回主菜单");
             System.out.print("\nSelect option: ");
 
-            String choice = scanner.nextLine().trim();
+            String choice = scan.nextLine().trim();
             switch (choice) {
                 case "1":
                     System.out.println(pos.getKitchenQueue().displayKitchenView());
@@ -242,7 +242,7 @@ public class Main {
         System.out.println(next.toKitchenDisplay());
         System.out.print("Mark as complete? (y/n): ");
 
-        if (scanner.nextLine().trim().equalsIgnoreCase("y")) {
+        if (scan.nextLine().trim().equalsIgnoreCase("y")) {
             Order completed = pos.completeKitchenOrder();
             System.out.println("✓ 完成 Order #" + completed.getOrderId() + " completed!");
         }
@@ -260,7 +260,7 @@ public class Main {
             System.out.println("[0] Back to Main Menu 返回主菜单");
             System.out.print("\nSelect option: ");
 
-            String choice = scanner.nextLine().trim();
+            String choice = scan.nextLine().trim();
             switch (choice) {
                 case "1":
                     System.out.println(pos.getTransactionHistory().displayAll());
@@ -289,7 +289,7 @@ public class Main {
     private static void viewRecentTransactions() {
         System.out.print("How many recent transactions to view? ");
         try {
-            int count = Integer.parseInt(scanner.nextLine().trim());
+            int count = scan.nextInt();
             List<Order> recent = pos.getTransactionHistory().getRecentTransactions(count);
 
             if (recent.isEmpty()) {
